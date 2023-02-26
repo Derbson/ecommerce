@@ -64,3 +64,7 @@ class Variacao(models.Model):
     def __str__(self):
         return self.nome or self.produto.nome
     
+    class Meta:
+        verbose_name_plural = 'Variações'
+    
+    
