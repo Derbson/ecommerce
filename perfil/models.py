@@ -27,20 +27,21 @@ class Perfil(models.Model):
     def clean(self):
         error_messages = {}
         
-        if not validators.valida_cpf(self.cpf):
+        if not validators.validate_cpf(self.cpf):
             error_messages['cpf'] = 'Erro: Digite um cpf válido.'
         
-        if not validators.valida_idade(self.idade):
+        if not validators.validate_age(self.idade):
             error_messages['idade'] = 'Error: Corrija idade'
 
-        if not validators.valida_cep(self.cep):
+        if not validators.validate_cep(self.cep):
             error_messages['cep'] = 'CEP inválido, digite apenas números'
 
+        if not validators.valida_data_nascimento(self.idade, self.data_nascimento):
+            error_messages['data_nascimento'] = 'Data não condiz com a idade.'
+        
         if error_messages:
             raise ValidationError(error_messages)
-
-        
-        print(self.data_nascimento)
+       
         
     class Meta:
         verbose_name_plural = 'Perfis'
