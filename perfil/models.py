@@ -1,6 +1,8 @@
 from django.db import models
 from .enderecos import estados
 from django.contrib.auth.models import User
+from django.forms import ValidationError
+from . import validators
 
 
 class Perfil(models.Model):
@@ -20,7 +22,25 @@ class Perfil(models.Model):
         )
     
     def __str__(self):
-        return f'{self.usuario.first_name} {self.usuario.last_name}'
+        return f'{self.usuario}'
 
+    def clean(self):
+        error_messages = {}
+        
+        if not validators.valida_cpf(self.cpf):
+            error_messages['cpf'] = 'Erro: Digite um cpf válido.'
+        
+        if not validators.valida_idade(self.idade):
+            error_messages['idade'] = 'Error: Corrija idade'
+
+        if not validators.valida_cep(self.cep):
+            error_messages['cep'] = 'CEP inválido, digite apenas números'
+
+        if error_messages:
+            raise ValidationError(error_messages)
+
+        
+        print(self.data_nascimento)
+        
     class Meta:
         verbose_name_plural = 'Perfis'
