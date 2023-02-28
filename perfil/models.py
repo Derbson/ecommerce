@@ -37,7 +37,7 @@ class Perfil(models.Model):
             error_messages['cep'] = 'CEP inválido, digite apenas números'
 
         if not validators.valida_data_nascimento(self.idade, self.data_nascimento):
-            error_messages['data_nascimento'] = 'Data não condiz com a idade.'
+            error_messages['data_nascimento'] = 'Data não condiz com a idade'
         
         if error_messages:
             raise ValidationError(error_messages)
