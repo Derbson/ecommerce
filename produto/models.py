@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from PIL import Image
 from django.utils.text import slugify
+from utils import utils
 import os
 
 class Produto(models.Model):
@@ -9,7 +10,7 @@ class Produto(models.Model):
     descricao_curta = models.TextField(max_length=255)
     descricao_longa = models.TextField()
     imagem = models.ImageField(upload_to='produtos_imagens/%Y/%m/', blank=True, null=True)
-    slug = models.SlugField(unique=True, blank=True, null=True)
+    slug = models.SlugField(unique=True,max_length=255, blank=True, null=True)
     preco_marketing = models.FloatField(verbose_name='preço')
     preco_promocional = models.FloatField(default=0, verbose_name='preço promo')
     tipo = models.CharField(
@@ -22,7 +23,7 @@ class Produto(models.Model):
     )
 
     def get_preco_formatado(self):
-        return f'R$ {self.preco_marketing:.2f}'.replace('.',',')
+        return utils.formata_preco(self.preco_marketing)
     get_preco_formatado.short_description = "Preço"
 
     @staticmethod

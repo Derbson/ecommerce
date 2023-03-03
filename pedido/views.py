@@ -8,6 +8,6 @@ class PagarPedido(View):
 class FecharPedido(View):
     pass
 
-class DetalhesPedido(View):
+class DetalhePedido(View):
     pass
 
