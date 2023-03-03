@@ -13,7 +13,7 @@ class ListaProdutos(ListView):
 class DetalheProdutos(DetailView):
     model = Produto
     template_name = 'produto/detalhe.html'
-    context_object_name = 'produtos'
+    context_object_name = 'produto'
 
 
 # class DetalheProdutos(View):
