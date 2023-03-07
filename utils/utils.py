@@ -7,7 +7,7 @@ def formata_preco(val):
         valor += numero
         if index % 3 == 0 and index != len(inteiro):
             valor += '.'
-
+    
     return f'R$ {valor[::-1]},{decimal}'
 
 
